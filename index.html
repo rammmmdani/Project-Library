@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Perpustakaan Al-Rabbani CRUD</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="logo">
+          <img src="assets/img/login.jpg" alt="Logo Perpustakaan Al-Rabbani" />
+          <div class="text-logo">
+            <span>Selamat Datang</span>
+            <h1>Perpustakaan Al-Rabbani</h1>
+          </div>
+        </div>
+        <ul>
+          <li><a href="#beranda">Beranda</a></li>
+          <li><a href="#katalog">Katalog</a></li>
+          <li><a href="#form-buku">CRUD Buku</a></li>
+          <li><a href="#kontak">Kontak</a></li>
+        </ul>
+      </nav>
+
+      <section class="hero" id="beranda">
+        <div class="hero-text">
+          <p class="label">Website CRUD LocalStorage</p>
+          <h1>Katalog Perpustakaan Digital</h1>
+          <p>
+            Kelola data buku digital secara langsung dari browser: tambah data,
+            lihat detail, ubah informasi buku, hapus buku, dan simpan data
+            otomatis menggunakan LocalStorage.
+          </p>
+          <div class="hero-actions">
+            <a href="#katalog" class="btn">Lihat Katalog</a>
+            <a href="#form-buku" class="btn outline">Tambah Buku</a>
+          </div>
+        </div>
+        <img
+          src="assets/img/perpusmodern.png"
+          alt="Ilustrasi katalog perpustakaan digital"
+        />
+      </section>
+    </header>
+
+    <main>
+      <section class="dashboard" aria-label="Ringkasan katalog">
+        <article class="stat-card">
+          <span>Total Buku</span>
+          <strong id="totalBuku">0</strong>
+        </article>
+        <article class="stat-card">
+          <span>Tersedia</span>
+          <strong id="totalTersedia">0</strong>
+        </article>
+        <article class="stat-card">
+          <span>Dipinjam</span>
+          <strong id="totalDipinjam">0</strong>
+        </article>
+      </section>
+
+      <section class="katalog" id="katalog">
+        <div class="section-heading">
+          <div>
+            <h2>Daftar Katalog Buku</h2>
+            <p class="subtitle">
+              Data buku bisa ditambah, dibaca, diubah, dan dihapus langsung di halaman ini.
+            </p>
+          </div>
+          <button type="button" class="btn danger-outline" id="resetDataBtn">
+            Reset Data Contoh
+          </button>
+        </div>
+
+        <div class="toolbar">
+          <label for="searchInput" class="sr-only">Cari buku</label>
+          <input
+            type="search"
+            id="searchInput"
+            placeholder="Cari ISBN, judul, penulis, tahun, atau status..."
+          />
+          <select id="filterStatus" aria-label="Filter status buku">
+            <option value="semua">Semua Status</option>
+            <option value="Tersedia">Tersedia</option>
+            <option value="Dipinjam">Dipinjam</option>
+          </select>
+        </div>
+
+        <div class="table-box">
+          <table>
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>ISBN</th>
+                <th>Judul Buku</th>
+                <th>Penulis</th>
+                <th>Tahun Terbit</th>
+                <th>Status</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="bookTableBody"></tbody>
+          </table>
+          <p id="emptyState" class="empty-state" hidden>
+            Data buku belum ada atau tidak sesuai dengan pencarian.
+          </p>
+        </div>
+      </section>
+
+      <section class="form-section" id="form-buku">
+        <div class="form-card">
+          <div class="section-heading compact">
+            <div>
+              <h2 id="formTitle">Tambah Buku Baru</h2>
+              <p class="subtitle">
+                Lengkapi data di bawah ini, lalu klik simpan untuk menambahkan buku.
+              </p>
+            </div>
+            <button type="button" class="btn outline hidden" id="cancelEditBtn">
+              Batal Edit
+            </button>
+          </div>
+
+          <form id="bookForm" autocomplete="off">
+            <input type="hidden" id="bookId" />
+
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="isbn">ISBN</label>
+                <input type="text" id="isbn" placeholder="Contoh: 978-602-8519-93-9" required />
+              </div>
+              <div class="form-group">
+                <label for="judul">Judul Buku</label>
+                <input type="text" id="judul" placeholder="Masukkan judul buku" required />
+              </div>
+              <div class="form-group">
+                <label for="penulis">Penulis</label>
+                <input type="text" id="penulis" placeholder="Masukkan nama penulis" required />
+              </div>
+              <div class="form-group">
+                <label for="tahun">Tahun Terbit</label>
+                <input type="number" id="tahun" min="1900" max="2100" placeholder="2026" required />
+              </div>
+              <div class="form-group">
+                <label for="status">Status</label>
+                <select id="status" required>
+                  <option value="Tersedia">Tersedia</option>
+                  <option value="Dipinjam">Dipinjam</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="halaman">Jumlah Halaman</label>
+                <input type="number" id="halaman" min="1" placeholder="210" required />
+              </div>
+              <div class="form-group">
+                <label for="penerbit">Penerbit</label>
+                <input type="text" id="penerbit" placeholder="Nama penerbit" required />
+              </div>
+              <div class="form-group">
+                <label for="bahasa">Bahasa</label>
+                <input type="text" id="bahasa" placeholder="Indonesia" required />
+              </div>
+              <div class="form-group">
+                <label for="lokasiRak">Lokasi Rak</label>
+                <input type="text" id="lokasiRak" placeholder="Rak A-03" required />
+              </div>
+              <div class="form-group">
+                <label for="rating">Rating</label>
+                <input type="number" id="rating" min="1" max="5" step="0.1" placeholder="4.8" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="sinopsis">Sinopsis Buku</label>
+              <textarea id="sinopsis" rows="4" placeholder="Tuliskan sinopsis singkat buku" required></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="ulasan">Ulasan</label>
+              <textarea id="ulasan" rows="3" placeholder="Tuliskan ulasan singkat" required></textarea>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn" id="submitBtn">Simpan Buku</button>
+              <button type="reset" class="btn muted" id="clearFormBtn">Bersihkan Form</button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer id="kontak">
+      <p>&copy; 2026 Perpustakaan Al-Rabbani</p>
+      <p>Email: alrabbani@gmail.com</p>
+    </footer>
+
+    <script src="assets/js/app.js"></script>
+  </body>
+</html>

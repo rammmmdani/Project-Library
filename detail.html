@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detail Buku - Perpustakaan Al-Rabbani</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="logo">
+          <img src="assets/img/login.jpg" alt="Logo E-Library" />
+          <div class="text-logo">
+            <span>Detail Buku</span>
+            <h1>PERPUS AL-RABBANI</h1>
+          </div>
+        </div>
+        <ul>
+          <li><a href="index.html">Beranda</a></li>
+          <li><a href="index.html#katalog">Katalog</a></li>
+          <li><a href="index.html#form-buku">CRUD Buku</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="detail-page" id="detailPage">
+      <section class="detail-card" id="detailCard">
+        <a href="index.html#katalog" class="back">← Kembali</a>
+
+        <h1 id="detailJudul">Memuat data...</h1>
+        <p class="author" id="detailPenulis"></p>
+
+        <div class="info">
+          <span id="detailIsbn"></span>
+          <span id="detailTahun"></span>
+          <span id="detailStatus"></span>
+        </div>
+
+        <h2>Sinopsis Buku</h2>
+        <p id="detailSinopsis"></p>
+
+        <h2>Detail Fisik Buku</h2>
+        <table class="detail-table">
+          <tr>
+            <th>Jumlah Halaman</th>
+            <td id="detailHalaman"></td>
+          </tr>
+          <tr>
+            <th>Penerbit</th>
+            <td id="detailPenerbit"></td>
+          </tr>
+          <tr>
+            <th>Bahasa</th>
+            <td id="detailBahasa"></td>
+          </tr>
+          <tr>
+            <th>Lokasi Rak</th>
+            <td id="detailLokasiRak"></td>
+          </tr>
+        </table>
+
+        <h2>Rating dan Ulasan</h2>
+        <div class="review">
+          <p class="rating" id="detailRating"></p>
+          <p id="detailUlasan"></p>
+        </div>
+
+        <h2>Daftar Peminjam Terakhir</h2>
+        <ul class="borrower-list" id="borrowerList"></ul>
+      </section>
+
+      <section class="side-card">
+        <h2>Informasi Buku</h2>
+        <p id="sideJudul"></p>
+        <p id="sidePenulis"></p>
+        <p id="sideStatus"></p>
+        <button type="button" id="borrowBtn">Pinjam Buku</button>
+        <a href="index.html#form-buku" class="btn outline full" id="editFromDetailBtn">Edit di Halaman CRUD</a>
+        <p class="note" id="detailNote">
+          Perubahan status akan tersimpan otomatis di LocalStorage browser.
+        </p>
+      </section>
+    </main>
+
+    <script src="assets/js/app.js"></script>
+  </body>
+</html>
